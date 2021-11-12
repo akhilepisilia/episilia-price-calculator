@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <title> Resonsive Pricing Table | CodingLab </title>
+    <link rel="stylesheet" href="style.css">
+    
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+
+var warn_msg_count=0;
+function price_cal(){
+$.getJSON("new.json", function(data) {
+    String.prototype.toTemplate=function(){
+        return eval('`'+this+'`');
+       
+    }
+    function changeStringToVariable(variable, value){
+        eval(`${variable} = ${value} `);
+        
+    }
+    function get_value(obj,search){
+        return obj[search]["value"]
+    
+    }  
+var c4=0,c6=0,c7=0,c8=0;
+// value at inputs \
+
+c4=document.getElementById("c4").value;
+c6=document.getElementById("c6").value;
+c7=document.getElementById("c7").value;
+c8=document.getElementById("c8").value;
+
+
+for(i in data){
+    
+    if (data[i]["type"]== "user_inputs"){
+        
+        if (i=="c4"){
+            data[i]["value"] = c4;
+        }
+        if (i=="c6"){
+            data[i]["value"] = c6;
+        }
+        if (i=="c7"){
+            data[i]["value"] = c7;
+        }
+        if (i=="c8"){
+            data[i]["value"] = c8;
+        }
+    }
+
+
+}
+var  avb_list=new Set(["c4","c6","c7","c8"])
+order_list=["units","cost_calculations","Summary cost Break up","Summary cost high level","Episilia only cost","Total Cost"]
+for (order in order_list)
+{
+    for(i in data){
+        if (data[i]["type"]== order_list[order]){
+        if (data[i]["fixed"]== false){
+            let input =data[i]["inputs"];
+            for(j in input)
+            {
+               
+                if (!(avb_list.has(input[j]))){
+                    avb_list.add(input[j])
+                    changeStringToVariable(input[j], get_value(data,input[j]));
+                }  
+            }
+            let formula =data[i]["formula"]
+            let temp_val=eval(formula.toTemplate())
+            data[i]["value"]=Number(parseFloat(temp_val).toFixed(2))
+        }
+        }
+    }  
+
+
+
+}
+if(warn_msg_count == 0){
+console.warn("Warning :: Dont modify any of thies varibles values --",avb_list);
+warn_msg_count=warn_msg_count+1;
+}
+show_order_list=["Total Cost","Episilia only cost","Summary cost high level","Summary cost Break up"];
+
+//console.log("Creating div cards");
+var priceview = document.getElementById("priceview");
+priceview.innerHTML="";
+var card1 = document.createElement("div");
+card1.className ="card one"
+
+
+var divdetails = document.createElement("div");
+divdetails.className ="details";
+for (order in show_order_list)
+{
+
+  var info = document.createElement("div");
+  info.className ="info1";
+  info.innerHTML =show_order_list[order];
+  divdetails.appendChild(info);
+
+    for(i in data){
+        if (data[i]["type"]== show_order_list[order]){
+         
+          var one = document.createElement('div');
+            one.className ="one";
+            var span1 = document.createElement("span");
+            var span2 = document.createElement("span");
+            span1.innerHTML = `${data[i]["name"]}`;
+            span2.innerHTML = `${data[i]["value"]}`;
+
+            
+            one.appendChild(span1);
+            one.appendChild(span2);
+            divdetails.appendChild(one);
+        }
+    }
+    
+  }
+  
+card1.appendChild(divdetails);
+
+
+priceview.appendChild(card1);
+//document.write(JSON.stringify(data))
+// this will show the info it in firebug console
+});
+}
+
+    </script>
+   </head>
+
+          <!-- Designined by CodingLab -->
+
+<body>
+    <div class="content">
+     
+      <div class="card one">
+        <div class="info">Price calculator</div>
+        <div class="details" >
+          <form onsubmit="price_cal();return false" >
+          <div class="one">
+            <span>Input data(GB)- Monthly:</span>
+            <div class="col-3">
+            <input type="number" id="c4" value=800 name="c4" required>
+            <span class="focus-border"></span>
+            </div>
+            
+          </div>
+          <div class="one">
+            <span>Parallel searches(s):</span>
+            <div class="col-3">
+            <select type="number" id="c6" name="c6">
+              <option value=6>6</option>
+              <option value=7>7</option>
+              <option value=8>8</option>
+              <option value=9>9</option>
+              <option value=10>10</option>
+              <option value=11>11</option>
+              <option value=12>12</option>
+              <option value=13>13</option>
+              <option value=14>14</option>
+            </select>
+            <span class="focus-border"></span>
+          </div>
+          </div>
+          <div class="one">
+            <span>Fixed search nodes:</span>
+            <div class="col-3">
+            <select type="number" id="c7" name="c7">
+              <option value=1>1</option>
+              <option value=2>2</option>
+              <option value=3>3</option>
+              <option value=4>4</option>
+              <option value=5>5</option>
+            </select>
+            <span class="focus-border"></span>
+            </div>
+          </div>
+          <div class="one">
+            <span>Live data size to be searched(GB):</span>
+            <div class="col-3">
+            <input type="number" id="c8" name="c8" value=1000 required>
+            <span class="focus-border"></span>
+            </div>
+          </div>
+          <button type="submit" >calculate</button>
+        </form>
+        </div>
+        
+      </div>
+    
+     
+
+
+
+
+
+
+
+    <div id="priceview">
+
+
+    </div>
+
+      
+    </div>
+</body>
+</html>
