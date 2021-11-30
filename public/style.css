@@ -161,11 +161,11 @@ select::-ms-expand {
 @media (max-width: 455px) {
   .content .card {
     width: 500px;
-    padding: 15px 30px 30px 30px;
+    padding: 15px 15px 15px 15px;
     margin-bottom: 50px;
   }
   .content .two {
-    width: 370px;
+    width: 360px;
   }
   .content .card .info {
     font-size: 16px;
@@ -246,8 +246,13 @@ select::-ms-expand {
     display: none;
   }
 }
-@media (max-width: 335px) {
+@media (max-width: 385px) {
   .content .two {
-    width: 300px;
+    width: 330px;
+  }
+}
+@media (max-width: 320px) {
+  .content .two {
+    width: 280px;
   }
 }
