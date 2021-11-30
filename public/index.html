@@ -55,7 +55,7 @@ for(i in data){
 
 }
 var  avb_list=new Set(["c4","c6","c7","c8"])
-order_list=["units","cost_calculations","Summary cost Break up","Summary cost high level","Episilia only cost","Total Cost"]
+order_list=["units","cost_calculations","Summary cost (Break up)","Summary cost (high level)","Episilia only cost","Total Cost"]
 for (order in order_list)
 {
     for(i in data){
@@ -84,40 +84,71 @@ if(warn_msg_count == 0){
 console.warn("Warning :: Dont modify any of thies varibles values --",avb_list);
 warn_msg_count=warn_msg_count+1;
 }
-show_order_list=["Total Cost","Episilia only cost","Summary cost high level","Summary cost Break up"];
+show_order_list=["Total Cost","Episilia only cost","Summary cost (high level)","Summary cost (Break up)"];
 
 //console.log("Creating div cards");
 var priceview = document.getElementById("priceview");
 priceview.innerHTML="";
 var card1 = document.createElement("div");
-card1.className ="card one"
+card1.className ="card one two"
 
 
 var divdetails = document.createElement("div");
 divdetails.className ="details";
 for (order in show_order_list)
 {
-
+  if(show_order_list[order]=="Total Cost" )
+  {
+    continue
+  }
   var info = document.createElement("div");
-  info.className ="info1";
+  if(show_order_list[order]=="Summary cost (high level)" || show_order_list[order]=="Summary cost (Break up)")
+            {
+              info.className ="info1 info2 ";//info2
+            }
+            else{
+              info.className ="info1";
+            }
+ 
+  if(show_order_list[order]=="Episilia only cost" )
+  {
+    info.innerHTML =show_order_list[0];
+  }
+  else{
   info.innerHTML =show_order_list[order];
+  }
   divdetails.appendChild(info);
+  var price_content = document.createElement("div");
+  if(show_order_list[order]=="Summary cost (high level)" || show_order_list[order]=="Summary cost (Break up)")
+  {
+    price_content.className ="panel";
 
+  }
     for(i in data){
-        if (data[i]["type"]== show_order_list[order]){
+        if (data[i]["type"]== show_order_list[order] && data[i]["name"]!="kafka"){
          
           var one = document.createElement('div');
             one.className ="one";
             var span1 = document.createElement("span");
             var span2 = document.createElement("span");
+           if(data[i]["type"]=="Episilia only cost")
+            {
+            span1.innerHTML = `<span class="star">*</span> ${data[i]["alt_name"]}`;
+            span2.innerHTML = `$${data[i]["value"]}`;
+            span2.className ="value_sty";
+            }
+            else{
             span1.innerHTML = `${data[i]["name"]}`;
-            span2.innerHTML = `${data[i]["value"]}`;
+            span2.innerHTML = `$${data[i]["value"]}`;
+            }
 
+           
             
             one.appendChild(span1);
             one.appendChild(span2);
-            divdetails.appendChild(one);
+            price_content.appendChild(one);
         }
+        divdetails.appendChild(price_content);
     }
     
   }
@@ -126,6 +157,7 @@ card1.appendChild(divdetails);
 
 
 priceview.appendChild(card1);
+document.getElementById('assumed').style.display ='block'; 
 //document.write(JSON.stringify(data))
 // this will show the info it in firebug console
 });
@@ -134,11 +166,12 @@ priceview.appendChild(card1);
     </script>
    </head>
 
-          <!-- Designined by CodingLab -->
-
+        
 <body>
+ 
+
     <div class="content">
-     
+    
       <div class="card one">
         <div class="info">Price calculator</div>
         <div class="details" >
@@ -191,7 +224,7 @@ priceview.appendChild(card1);
           <button type="submit" >calculate</button>
         </form>
         </div>
-        
+       
       </div>
     
      
@@ -202,10 +235,10 @@ priceview.appendChild(card1);
 
 
 
-    <div id="priceview">
+      <div id="priceview">
 
 
-    </div>
+        </div>
 
       
     </div>
