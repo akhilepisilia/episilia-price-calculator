@@ -12,11 +12,13 @@ body {
   justify-content: center;
   padding: 20px;
 }
+
 .content {
   max-width: 1090px;
   width: 100%;
   margin: auto;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
 }
@@ -35,11 +37,17 @@ body {
   border-bottom: 5px solid #08d195;
 }
 .info1 {
-  font-size: 16px;
+  font-size: 16.5px;
   text-align: left;
   margin-top: 20px;
   margin-bottom: 10px;
   border-bottom: 2px solid #08d195;
+}
+.star {
+  color: red;
+}
+.info2 {
+  font-size: 15px;
 }
 .content .card .details .one {
   margin-top: 10px;
@@ -136,8 +144,115 @@ select:focus {
 select::-ms-expand {
   display: none;
 }
+
+.value_sty {
+  font-weight: 500;
+}
 @media (max-width: 1050px) {
   .content .card {
     margin-bottom: 50px;
+  }
+}
+@media (max-width: 535px) {
+  .content .two {
+    width: 420px;
+  }
+}
+@media (max-width: 455px) {
+  .content .card {
+    width: 500px;
+    padding: 15px 15px 15px 15px;
+    margin-bottom: 50px;
+  }
+  .content .two {
+    width: 360px;
+  }
+  .content .card .info {
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+  }
+  .info1 {
+    font-size: 16px;
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #08d195;
+  }
+
+  .info2 {
+    font-size: 14px;
+  }
+  .content .card .details .one {
+    margin-top: 7px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  .content .card button {
+    height: 35px;
+    margin-top: 20px;
+    font-size: 16px;
+    width: 100%;
+  }
+
+  .col-3 {
+    float: left;
+    width: 27.33%;
+    position: relative;
+  }
+
+  input[type="number"] {
+    font: 14px/24px "Lato", Arial, sans-serif;
+    color: #333;
+    width: 100%;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+  }
+  :focus {
+    outline: none;
+  }
+  input {
+    padding: 5px 0;
+  }
+  input ~ .focus-border {
+    height: 1px;
+  }
+  input:focus ~ .focus-border {
+    width: 100%;
+    transition: 0.4s;
+  }
+
+  select {
+    padding: 0 10px 0 10px;
+    color: #333;
+    border: 1.8px solid #ccc;
+    border-radius: 3px;
+    line-height: 11px;
+    height: 30px;
+    box-sizing: border-box;
+    background: #fff;
+
+    min-width: 25px;
+    margin: 0 5px 5px 0;
+  }
+  select:focus {
+    border-color: #08d195;
+  }
+  select::-ms-expand {
+    display: none;
+  }
+}
+@media (max-width: 385px) {
+  .content .two {
+    width: 330px;
+  }
+}
+@media (max-width: 320px) {
+  .content .two {
+    width: 280px;
   }
 }
