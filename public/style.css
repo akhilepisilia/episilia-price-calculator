@@ -49,6 +49,9 @@ body {
 .info2 {
   font-size: 15px;
 }
+.content .card .details .panel .one {
+  font-size: 14px;
+}
 .content .card .details .one {
   margin-top: 10px;
   font-size: 15px;
@@ -57,7 +60,18 @@ body {
   align-items: center;
   position: relative;
 }
-.content .card button {
+.content .card .panel1 .one {
+  margin-top: 10px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.content .card .details .panel .one {
+  font-size: 14px;
+}
+.content .card .submit {
   outline: none;
 
   height: 42px;
@@ -70,15 +84,16 @@ body {
   transition: all 0.3s ease;
   cursor: pointer;
   letter-spacing: 1px;
-  background: white;
-  color: #08d195;
+
+  background: #08d195;
+  color: white;
 
   border: 2px solid #08d195;
 }
-.content button:hover {
+.content .submit:hover {
   /*filter: brightness(90%);*/
-  background: #08d195;
-  color: white;
+  background: white;
+  color: #08d195;
 }
 
 input[type="number"] {
@@ -145,8 +160,51 @@ select::-ms-expand {
   display: none;
 }
 
+.accordion {
+  background-color: white;
+  color: #e30bb4;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  text-align: right;
+  outline: none;
+  font-size: 15px;
+
+  transition: 0.4s;
+}
+
+.active,
+.accordion:hover {
+  color: #e30bb4;
+}
+
+.accordion:after {
+  content: "\002B";
+  color: #e30bb4;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+  color: #e30bb4;
+}
+
+.panel1 {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+
+  border-top: 1.2px solid #e30bb4;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
 .value_sty {
-  font-weight: 500;
+  font-weight: 400;
 }
 @media (max-width: 1050px) {
   .content .card {
@@ -165,7 +223,7 @@ select::-ms-expand {
     margin-bottom: 50px;
   }
   .content .two {
-    width: 360px;
+    width: 370px;
   }
   .content .card .info {
     font-size: 16px;
@@ -174,7 +232,7 @@ select::-ms-expand {
     padding-bottom: 5px;
   }
   .info1 {
-    font-size: 16px;
+    font-size: 15px;
     text-align: left;
     margin-top: 20px;
     margin-bottom: 10px;
@@ -186,13 +244,21 @@ select::-ms-expand {
   }
   .content .card .details .one {
     margin-top: 7px;
-    font-size: 14px;
+    font-size: 13px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
   }
-  .content .card button {
+  .content .card .panel1 .one {
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  .details .panel .one {
+    font-size: 13.5px;
+  }
+
+  .content .card .submit {
     height: 35px;
     margin-top: 20px;
     font-size: 16px;
@@ -244,6 +310,9 @@ select::-ms-expand {
   }
   select::-ms-expand {
     display: none;
+  }
+  .accordion {
+    font-size: 13px;
   }
 }
 @media (max-width: 385px) {
