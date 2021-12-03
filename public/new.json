@@ -360,13 +360,13 @@
     },
     "i7":{
         
-        "name":"Cost Per GB",
+        "name":"Cost Per TB",
         "type":"Episilia cost",
         "display":true,
         "display_value_type":"cost",
         "fixed":false,
-        "formula":"${i6}/${c4}",
-        "inputs":["i6","c4"],
+        "formula":"${i6}/${i5}",
+        "inputs":["i6","i5"],
         "value":0
     }
 
