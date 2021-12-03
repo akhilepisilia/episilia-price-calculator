@@ -64,7 +64,7 @@ for (order in order_list)
         if (data[i]["type"]== order_list[order]){
         if (data[i]["fixed"]== false){
             let input =data[i]["inputs"];
-            
+           
             for(j in input)
             {
                
@@ -79,11 +79,13 @@ for (order in order_list)
             
             
         }
+       
         }
     }  
-
+   
 
 }
+console.log(c23,c24)
 if(warn_msg_count == 0){
 console.warn("Warning :: Dont modify any of thies varibles values --",avb_list);
 warn_msg_count=warn_msg_count+1;
