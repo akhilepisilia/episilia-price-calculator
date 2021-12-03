@@ -322,7 +322,6 @@
     },
 
  
-
     "i12":{
         
         "name":"Local storage(EBS)",
@@ -361,7 +360,5 @@
         "inputs":["i10","i11","i12"],
         "value":0
     }
-   
-   
 
 }
