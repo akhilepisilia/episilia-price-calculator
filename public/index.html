@@ -57,7 +57,7 @@ for(i in data){
 
 }
 var  avb_list=new Set(["c4","c5","c7","c8"])
-order_list=["units","cost_calculations","Infra Cost (high-level)","Summary cost (Break up)","Episilia cost"]
+order_list=["units","cost_calculations","Infra Cost (High Level)","Compute Cost (Break Up)","Episilia cost"]
 for (order in order_list)
 {
     for(i in data){
@@ -89,7 +89,7 @@ if(warn_msg_count == 0){
 console.warn("Warning :: Dont modify any of thies varibles values --",avb_list);
 warn_msg_count=warn_msg_count+1;
 }
-show_order_list=["Episilia cost","Infra Cost (high-level)","Summary cost (Break up)"];
+show_order_list=["Episilia cost","Infra Cost (High Level)","Compute Cost (Break Up)"];
 
 //console.log("Creating div cards");
 var priceview = document.getElementById("priceview");
@@ -107,7 +107,7 @@ for (order in show_order_list)
     continue
   }
   var info = document.createElement("div");
-  if(show_order_list[order]=="Infra Cost (high-level)" || show_order_list[order]=="Summary cost (Break up)")
+  if(show_order_list[order]=="Infra Cost (High Level)" || show_order_list[order]=="Compute Cost (Break Up)")
             {
               info.className ="info1 info2 ";//info2
             }
@@ -130,7 +130,7 @@ else{
 }
   divdetails.appendChild(info);
   var price_content = document.createElement("div");
-  if(show_order_list[order]=="Summary cost (Break up)")
+  if(show_order_list[order]=="Compute Cost (Break Up)")
   {
    // price_content.className ="panel";
 

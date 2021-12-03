@@ -232,7 +232,7 @@
     "i17":{
         
         "name":"Indexer",
-        "type":"Summary cost (Break up)",
+        "type":"Compute Cost (Break Up)",
         "display":false,
         "display_value_type":"cost",
         "fixed":false,
@@ -243,7 +243,7 @@
     "i18":{
         
         "name":"Search",
-        "type":"Summary cost (Break up)",
+        "type":"Compute Cost (Break Up)",
         "display":false,
         "display_value_type":"cost",
         "fixed":false,
@@ -254,7 +254,7 @@
     "i19":{
         
         "name":"Gateway+Optimizer",
-        "type":"Summary cost (Break up)",
+        "type":"Compute Cost (Break Up)",
         "display":false,
         "display_value_type":"cost",
         "fixed":false,
@@ -265,7 +265,7 @@
     "i20":{
         
         "name":"Search Cost %",
-        "type":"Summary cost (Break up)",
+        "type":"Compute Cost (Break Up)",
         "display":true,
         "display_value_type":"number",
         "fixed":false,
@@ -276,7 +276,7 @@
     "i21":{
         
         "name":"Ingestion Cost %",
-        "type":"Summary cost (Break up)",
+        "type":"Compute Cost (Break Up)",
         "display":true,
         "display_value_type":"number",
         "fixed":false,
@@ -288,7 +288,7 @@
     "i9":{
         
         "name":"Node count",
-        "type":"Infra Cost (high-level)",
+        "type":"Infra Cost (High Level)",
         "alt_type":"Episilia cost",
         "display":true,
         "display_value_type":"number",
@@ -300,7 +300,7 @@
     "i10":{
         
         "name":"Compute (t3.medium)",
-        "type":"Infra Cost (high-level)",
+        "type":"Infra Cost (High Level)",
         "display":true,
         "display_value_type":"cost",
         "fixed":false,
@@ -312,7 +312,7 @@
     "i11":{
         
         "name":"Block Storage (S3)",
-        "type":"Infra Cost (high-level)",
+        "type":"Infra Cost (High Level)",
         "display":true,
         "display_value_type":"cost",
         "fixed":false,
@@ -326,7 +326,7 @@
     "i12":{
         
         "name":"Local storage(EBS)",
-        "type":"Infra Cost (high-level)",
+        "type":"Infra Cost (High Level)",
         "display":true,
         "display_value_type":"cost",
         "fixed":false,
@@ -344,7 +344,7 @@
          "display":true,
          "display_value_type":"number",
          "fixed":false,
-         "formula":"Math.ceil(${c5}/1024)",
+         "formula":"${c5}/1024",
          "inputs":["c5"],
          "value":0
      },
