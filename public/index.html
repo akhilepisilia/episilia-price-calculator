@@ -25,14 +25,15 @@ $.getJSON("new.json", function(data) {
         return obj[search]["value"]
     
     }  
-var c4=0,c6=0,c7=0,c8=0;
+var c4=0,c5=0;c7=0,c8=0;
 // value at inputs \
 
 c4=document.getElementById("c4").value;
-c6=document.getElementById("c6").value;
+c5=c4*30;
 c7=document.getElementById("c7").value;
 c8=document.getElementById("c8").value;
 
+console.log(c4,c5,c7,c8)
 
 for(i in data){
     
@@ -41,27 +42,29 @@ for(i in data){
         if (i=="c4"){
             data[i]["value"] = c4;
         }
-        if (i=="c6"){
-            data[i]["value"] = c6;
-        }
+        if (i=="c5"){
+          data[i]["value"] = c5;
+      }
         if (i=="c7"){
             data[i]["value"] = c7;
         }
         if (i=="c8"){
             data[i]["value"] = c8;
         }
+
     }
 
 
 }
-var  avb_list=new Set(["c4","c6","c7","c8"])
-order_list=["units","cost_calculations","Summary cost (Break up)","Summary cost (high level)","Episilia only cost","Total Cost"]
+var  avb_list=new Set(["c4","c5","c7","c8"])
+order_list=["units","cost_calculations","Infra Cost (High Level)","Compute Cost (Break Up)","Episilia cost"]
 for (order in order_list)
 {
     for(i in data){
         if (data[i]["type"]== order_list[order]){
         if (data[i]["fixed"]== false){
             let input =data[i]["inputs"];
+            
             for(j in input)
             {
                
@@ -73,10 +76,11 @@ for (order in order_list)
             let formula =data[i]["formula"]
             let temp_val=eval(formula.toTemplate())
             data[i]["value"]=Number(parseFloat(temp_val).toFixed(2))
+            
+            
         }
         }
     }  
-
 
 
 }
@@ -84,7 +88,7 @@ if(warn_msg_count == 0){
 console.warn("Warning :: Dont modify any of thies varibles values --",avb_list);
 warn_msg_count=warn_msg_count+1;
 }
-show_order_list=["Total Cost","Episilia only cost","Summary cost (high level)","Summary cost (Break up)"];
+show_order_list=["Episilia cost","Infra Cost (High Level)","Compute Cost (Break Up)"];
 
 //console.log("Creating div cards");
 var priceview = document.getElementById("priceview");
@@ -102,7 +106,7 @@ for (order in show_order_list)
     continue
   }
   var info = document.createElement("div");
-  if(show_order_list[order]=="Summary cost (high level)" || show_order_list[order]=="Summary cost (Break up)")
+  if(show_order_list[order]=="Infra Cost (High Level)" || show_order_list[order]=="Compute Cost (Break Up)")
             {
               info.className ="info1 info2 ";//info2
             }
@@ -110,44 +114,49 @@ for (order in show_order_list)
               info.className ="info1";
             }
  
-  if(show_order_list[order]=="Episilia only cost" )
-  {
-    info.innerHTML =show_order_list[0];
-  }
-  else{
+if(show_order_list[order]=="Episilia cost")
+{
+  info.innerHTML ="Summary"
+  Storage_logo = document.createElement("img");
+  Storage_logo.className ="stroageLogo";
+  Storage_logo.setAttribute("src","aws_logo1.png");
+  info.appendChild(Storage_logo);
+  
+}
+
+else{
   info.innerHTML =show_order_list[order];
-  }
+}
   divdetails.appendChild(info);
   var price_content = document.createElement("div");
-  if(show_order_list[order]=="Summary cost (high level)" || show_order_list[order]=="Summary cost (Break up)")
+  if(show_order_list[order]=="Compute Cost (Break Up)")
   {
-    price_content.className ="panel";
+   // price_content.className ="panel";
 
   }
     for(i in data){
-        if (data[i]["type"]== show_order_list[order] && data[i]["name"]!="kafka"){
+        if (data[i]["type"]== show_order_list[order] ){
+          if( data[i]["display"]==true){
          
           var one = document.createElement('div');
             one.className ="one";
             var span1 = document.createElement("span");
             var span2 = document.createElement("span");
-           if(data[i]["type"]=="Episilia only cost")
+            span1.innerHTML = `${data[i]["name"]}`;
+           if(data[i]["display_value_type"]=="cost"  )
             {
-            span1.innerHTML = `<span class="star">*</span> ${data[i]["alt_name"]}`;
-            span2.innerHTML = `$${data[i]["value"]}`;
-            span2.className ="value_sty";
+            let num =data[i]["value"]
+            span2.innerHTML = `$ ${(Math.round(num * 100) / 100).toFixed(2)}`;
             }
             else{
-            span1.innerHTML = `${data[i]["name"]}`;
-            span2.innerHTML = `$${data[i]["value"]}`;
+              span2.innerHTML = `${data[i]["value"]}`;
             }
-
-           
-            
+            span2.className ="value_sty";
             one.appendChild(span1);
             one.appendChild(span2);
             price_content.appendChild(one);
         }
+      }
         divdetails.appendChild(price_content);
     }
     
@@ -157,54 +166,64 @@ card1.appendChild(divdetails);
 
 
 priceview.appendChild(card1);
-document.getElementById('assumed').style.display ='block'; 
+
 //document.write(JSON.stringify(data))
 // this will show the info it in firebug console
 });
 }
-
+price_cal()
     </script>
    </head>
-
-        
+     
 <body>
  
 
     <div class="content">
     
       <div class="card one">
-        <div class="info">Price calculator</div>
+        <div class="info">Cost calculator</div>
         <div class="details" >
           <form onsubmit="price_cal();return false" >
           <div class="one">
-            <span>Input data(GB)- Monthly:</span>
+            <span>Input Data(GB)- Daily:</span>
             <div class="col-3">
-            <input type="number" id="c4" value=800 name="c4" required>
+            <input type="number" id="c4" value=1000 name="c4" required>
             <span class="focus-border"></span>
             </div>
             
           </div>
           <div class="one">
-            <span>Parallel searches(s):</span>
+            <span>Parallel Search:</span>
             <div class="col-3">
-            <select type="number" id="c6" name="c6">
+            <select type="number" id="c7" name="c7" >
+              <option value=1>1</option>
+              <option value=2>2</option>
+              <option value=3>3</option>
+              <option value=4>4</option>
+              <option value=5>5</option>
               <option value=6>6</option>
               <option value=7>7</option>
               <option value=8>8</option>
               <option value=9>9</option>
-              <option value=10>10</option>
+              <option value=10 selected="selected" >10</option>
               <option value=11>11</option>
               <option value=12>12</option>
               <option value=13>13</option>
               <option value=14>14</option>
+              <option value=15>15</option>
+              <option value=16>16</option>
+              <option value=17>17</option>
+              <option value=18>18</option>
+              <option value=19>19</option>
+              <option value=20>20</option>
             </select>
             <span class="focus-border"></span>
           </div>
           </div>
           <div class="one">
-            <span>Fixed search nodes:</span>
+            <span>Fixed Search Nodes:</span>
             <div class="col-3">
-            <select type="number" id="c7" name="c7">
+            <select type="number" id="c8" name="c8">
               <option value=1>1</option>
               <option value=2>2</option>
               <option value=3>3</option>
@@ -214,17 +233,28 @@ document.getElementById('assumed').style.display ='block';
             <span class="focus-border"></span>
             </div>
           </div>
-          <div class="one">
-            <span>Live data size to be searched(GB):</span>
-            <div class="col-3">
-            <input type="number" id="c8" name="c8" value=1000 required>
-            <span class="focus-border"></span>
+          <button type="submit" class="submit" >Calculate</button>
+        </form>
+
+        </div>
+         <button id="acc" class="accordion">Addition info</button>
+          <div class="panel1">
+            <div class="one">
+              <span>s3 cost</span>
+             
+              <span class="value_sty" >$ 0.023</span>
+              
+              
+            </div>
+
+            <div class="one">
+              <span>t3.medium	cost(ON-demand)</span>
+             
+              <span class="value_sty">$ 0.0416</span>
+              
+              
             </div>
           </div>
-          <button type="submit" >calculate</button>
-        </form>
-        </div>
-       
       </div>
     
      
@@ -242,5 +272,19 @@ document.getElementById('assumed').style.display ='block';
 
       
     </div>
+<script>
+var acc=document.getElementById("acc");
+acc.addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel =  this.nextElementSibling;//document.getElementsByClassName("panel1");
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+
+    
+    </script>
 </body>
 </html>

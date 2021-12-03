@@ -2,317 +2,362 @@
 
     "c4":{
         
+        "name":"daily_data",
+        "type":"user_inputs",
+        "value":0
+    },
+    "c5":{
+        
         "name":"monthly_data",
         "type":"user_inputs",
-        "value":6
-    },
-    "c6":{
-        
-        "name":"monthparallel_searchesly_data",
-        "type":"user_inputs",
-        "value":6
+        "value":0
     },
     "c7":{
+        
+        "name":"parallel_searches",
+        "type":"user_inputs",
+        "value":0
+    },
+    "c8":{
         
         "name":"fixed_search_nodes",
         "type":"user_inputs",
         "value":6
     },
-    "c8":{
-        
-        "name":"live_data_size_to_be_searched",
-        "type":"user_inputs",
-        "value":6
-    },
-    "c27":{
+
+    "c28":{
         
         "name":"compression_ratio",
         "type":"units",
         "fixed":true,
-        "value":10
+        "value":0.10
     },
-    "c28":{
+    "c29":{
         
         "name":"stage_file_size",
         "type":"units",
         "fixed":true,
         "value":100
     },
-    "c29":{
+    "c30":{
         
         "name":"optimized_file_size",
         "type":"units",
         "fixed":true,
         "value":10
     },
-    "c30":{
+    "c31":{
         
         "name":"stage_folder_1_GB",
         "type":"units",
         "fixed":true,
         "value":1048576
     },
-    "c33":{
+    "c34":{
         
         "name":"final_folder_1_GB",
         "type":"units",
         "fixed":true,
         "value":100
     },
-    "c34":{
+    "c35":{
         
         "name":"1M_PUT_is ",
         "type":"units",
         "fixed":true,
         "value":5
     },
-    "c35":{
+    "c36":{
         
         "name":"GET_is_1M",
         "type":"units",
         "fixed":true,
         "value":0.4
     },
-    "c36":{
+    "c37":{
         
         "name":"s3_cost",
         "type":"units",
         "fixed":true,
         "value":0.023
     },
-    "c37":{
+    "c38":{
         
         "name":"cluster_cost_4GB",
         "type":"units",
-        "fixed":true,
-        "value":30
+        "fixed":false,
+        "formula":"Math.round(730.001 *0.0416)",
+        "inputs":[],
+        "value":0
     },
-    "c38":{
+    "c39":{
         
         "name":"cluster_capacity_1",
         "type":"units",
         "fixed":true,
         "value":1000
     },
-    "c39":{
+    "c40":{
         
         "name":"ebs_cost_1GB",
         "type":"units",
         "fixed":true,
         "value":0.1
     },
-    "c40":{
+    "c41":{
         
         "name":"kafka_m5_ssmall_cost",
         "type":"units",
         "fixed":false,
-        "formula":"67.85 + ${c4}/4*0.1",
-        "inputs":["c4"],
+        "formula":"67.85 + ${c5}/4*0.1",
+        "inputs":["c5"],
         "value":10
     },
-    "c41":{
+    "c42":{
         
         "name":"indexer_throughput",
         "type":"units",
         "fixed":true,
-        "value":1000
+        "value":250
     },
-    "c13":{
+
+
+    "c14":{
         
         "name":"compressed_data",
         "type":"cost_calculations",
+       
         "fixed":false,
-        "formula":"${c4}/${c27}",
-        "inputs":["c4","c27"],
-        "value":0
-    },
-    "c14":{
-        
-        "name":"stage_files",
-        "type":"cost_calculations",
-        "fixed":false,
-        "formula":"${c13}*0.01",
-        "inputs":["c13"],
+        "formula":"${c5}*${c28}",
+        "inputs":["c5","c28"],
         "value":0
     },
     "c15":{
         
-        "name":"optimized_files",
+        "name":"stage_files",
         "type":"cost_calculations",
+       
         "fixed":false,
-        "formula":"${c13}*100",
-        "inputs":["c13"],
+        "formula":"${c14}*0.01",
+        "inputs":["c14"],
         "value":0
     },
     "c16":{
         
-        "name":"s3_storage_cost",
+        "name":"optimized_files",
         "type":"cost_calculations",
+      
         "fixed":false,
-        "formula":"${c13}*${c36}",
-        "inputs":["c13","c36"],
+        "formula":"${c14}*100",
+        "inputs":["c14"],
         "value":0
     },
     "c17":{
         
-        "name":"stage_put_cost",
+        "name":"s3_storage_cost",
         "type":"cost_calculations",
+    
         "fixed":false,
-        "formula":"${c14}*${c34}",
-        "inputs":["c14","c34"],
+        "formula":"${c14}*${c37}",
+        "inputs":["c14","c37"],
         "value":0
     },
     "c18":{
         
-        "name":"get_cost",
+        "name":"stage_put_cost",
         "type":"cost_calculations",
+       
         "fixed":false,
-        "formula":"${c14}*${c35}*2",
-        "inputs":["c14","c35"],
+        "formula":"${c15}*${c35}",
+        "inputs":["c15","c35"],
         "value":0
     },
     "c19":{
         
-        "name":"horizontal_live_clusters",
+        "name":"get_cost",
         "type":"cost_calculations",
+       
         "fixed":false,
-        "formula":"Math.ceil(c6/10)",
-        "inputs":["c6"],
+        "formula":"${c15}*${c36}*2",
+        "inputs":["c15","c36"],
         "value":0
     },
     "c20":{
         
-        "name":"indexer_pods",
+        "name":"horizontal_live_clusters",
         "type":"cost_calculations",
+      
         "fixed":false,
-        "formula":"${c4}/${c41}",
-        "inputs":["c4","c41"],
+        "formula":"Math.ceil(${c7}/5)",
+        "inputs":["c7"],
         "value":0
     },
     "c21":{
         
+        "name":"indexer_pods",
+        "type":"cost_calculations",
+        "fixed":false,
+        "formula":"Math.ceil(${c4}/${c42})",
+        "inputs":["c4","c42"],
+        "value":0
+    },
+    "c22":{
+        
         "name":"search_pods",
         "type":"cost_calculations",
         "fixed":false,
-        "formula":"${c19}+${c7}",
-        "inputs":["c19","c7"],
+        "formula":"${c20}+${c8}",
+        "inputs":["c20","c8"],
         "value":0
     },
-    
-    "i16":{
+    "c23":{
         
-        "name":"indexer",
-        "type":"Summary cost (Break up)",
-        "fixed":false,
-        "formula":"${c20}/4*${c37}",
-        "inputs":["c20","c37"],
-        "value":0
+        "name":"Cpanel Pod",
+        "type":"cost_calculations",
+        "fixed":true,
+        "value":1
     },
+
+    "c24":{
+        
+        "name":"Optiimzer Pod",
+        "type":"cost_calculations",
+        "fixed":true,
+        "value":1
+    },
+
+
+   
+    
     "i17":{
         
-        "name":"Search",
-        "type":"Summary cost (Break up)",
+        "name":"Indexer",
+        "type":"Compute Cost (Break Up)",
+        "display":false,
+        "display_value_type":"cost",
         "fixed":false,
-        "formula":"${c21}/2*${c37}*Math.ceil(${c8}/500)",
-        "inputs":["c21","c37","c8"],
+        "formula":"${c21}/4*${c38}",
+        "inputs":["c21","c38"],
         "value":0
     },
     "i18":{
         
-        "name":"gateway+optimizer",
-        "type":"Summary cost (Break up)",
+        "name":"Search",
+        "type":"Compute Cost (Break Up)",
+        "display":false,
+        "display_value_type":"cost",
         "fixed":false,
-        "formula":"${c37}/4",
-        "inputs":["c37"],
+        "formula":"${c22}/2*${c38}",
+        "inputs":["c22","c38"],
         "value":0
     },
-
     "i19":{
         
-        "name":"s3",
-        "type":"Summary cost (Break up)",
+        "name":"Gateway+Optimizer",
+        "type":"Compute Cost (Break Up)",
+        "display":false,
+        "display_value_type":"cost",
         "fixed":false,
-        "formula":"${c16}+${c17}+${c18}",
-        "inputs":["c16","c17","c18"],
+        "formula":"${c38}/4",
+        "inputs":["c38"],
         "value":0
     },
-
     "i20":{
         
-        "name":"cache PVC cost(EBS)",
-        "type":"Summary cost (Break up)",
+        "name":"Search Cost %",
+        "type":"Compute Cost (Break Up)",
+        "display":true,
+        "display_value_type":"number",
         "fixed":false,
-        "formula":"${c13}*${c39}*${c19}",
-        "inputs":["c13","c39","c19"],
+        "formula":"(${c22}*2+0.5)/(4*i9)*100",
+        "inputs":["c22","i9"],
         "value":0
     },
-
     "i21":{
         
-        "name":"kafka",
-        "type":"Summary cost (Break up)",
+        "name":"Ingestion Cost %",
+        "type":"Compute Cost (Break Up)",
+        "display":true,
+        "display_value_type":"number",
         "fixed":false,
-        "formula":"${c40}",
-        "inputs":["c40"],
-        "value":0
-    },
-    "i7":{
-        
-        "name":"Compute (Cluster)",
-        "type":"Summary cost (high level)",
-        "fixed":false,
-        "formula":"${i16}+${i17}+${i18}",
-        "inputs":["i16","i17","i18"],
+        "formula":"(${c21}+${c23}+0.5)/(4*i9)*100",
+        "inputs":["c21","c23","i9"],
         "value":0
     },
 
     "i9":{
         
-        "name":"Storage",
-        "type":"Summary cost (high level)",
+        "name":"Node count",
+        "type":"Infra Cost (High Level)",
+        "alt_type":"Episilia cost",
+        "display":true,
+        "display_value_type":"number",
         "fixed":false,
-        "formula":"${i19}+${i20}",
-        "inputs":["i19","i20"],
+        "formula":"Math.ceil((${c21}+${c22}+${c23}+${c24})/4)",
+        "inputs":["c21","c22","c23","c24"],
         "value":0
     },
-
     "i10":{
         
-        "name":"Episilia cost",
-        "type":"Summary cost (high level)",
+        "name":"Compute (t3.medium)",
+        "type":"Infra Cost (High Level)",
+        "display":true,
+        "display_value_type":"cost",
         "fixed":false,
-        "formula":"${i7}+${i9}",
-        "inputs":["i7","i9"],
+        "formula":"${i9}*${c38}",
+        "inputs":["i9","c38"],
         "value":0
     },
 
+    "i11":{
+        
+        "name":"Block Storage (S3)",
+        "type":"Infra Cost (High Level)",
+        "display":true,
+        "display_value_type":"cost",
+        "fixed":false,
+        "formula":"${c17}+${c18}+${c19}",
+        "inputs":["c17","c18","c19"],
+        "value":0
+    },
+
+ 
     "i12":{
         
-        "name":"Kafka cost",
-        "type":"Summary cost (high level)",
+        "name":"Local storage(EBS)",
+        "type":"Infra Cost (High Level)",
+        "display":true,
+        "display_value_type":"cost",
         "fixed":false,
-        "formula":"${i21}",
-        "inputs":["i21"],
+        "formula":"${c4}*${c40}*${c22}*${c28}",
+        "inputs":["c4","c40","c22","c28"],
         "value":0
     },
 
+ 
     "i5":{
         
-        "name":"Episilia only cost (Without kafka)",
-        "alt_name":"Total Cost",
-        "type":"Episilia only cost",
-        "fixed":false,
-        "formula":"${i10}",
-        "inputs":["i10"],
-        "value":0
-    },
-    "i4":{
+        "name":"Input Data(TB)- Monthly",
+         "alt_type":"Total Cost of Episilia(Monthly) for AWS",
+         "type":"Episilia cost",
+         "display":true,
+         "display_value_type":"number",
+         "fixed":false,
+         "formula":"${c5}/1024",
+         "inputs":["c5"],
+         "value":0
+     },
+
+    "i6":{
         
-        "name":"Total Cost (with Kafka)",
-        "type":"Total Cost",
+        "name":"Total cost",
+        "alt_type":"Total Cost of Episilia(Monthly) for AWS",
+        "type":"Episilia cost",
+        "display":true,
+        "display_value_type":"cost",
         "fixed":false,
-        "formula":"${i7}+${i9}+${i12}",
-        "inputs":["i7","i9","i12"],
+        "formula":"${i10}+${i11}+${i12}",
+        "inputs":["i10","i11","i12"],
         "value":0
     }
 
