@@ -64,7 +64,7 @@ for (order in order_list)
         if (data[i]["type"]== order_list[order]){
         if (data[i]["fixed"]== false){
             let input =data[i]["inputs"];
-            console.log(data[i]["name"])
+            
             for(j in input)
             {
                
@@ -76,7 +76,7 @@ for (order in order_list)
             let formula =data[i]["formula"]
             let temp_val=eval(formula.toTemplate())
             data[i]["value"]=Number(parseFloat(temp_val).toFixed(2))
-            console.log(data[i]["value"])
+            
             
         }
         }
