@@ -293,7 +293,7 @@
         "display":true,
         "display_value_type":"number",
         "fixed":false,
-        "formula":"Math.ceil((${c21}+${c22}+${c23}+${c24})/4)",
+        "formula":"Math.ceil((${c21}+${c22}*2+${c23}+${c24})/4)",
         "inputs":["c21","c22","c23","c24"],
         "value":0
     },
@@ -338,7 +338,6 @@
     "i5":{
         
         "name":"Input Data(TB)- Monthly",
-         "alt_type":"Total Cost of Episilia(Monthly) for AWS",
          "type":"Episilia cost",
          "display":true,
          "display_value_type":"number",
@@ -351,13 +350,23 @@
     "i6":{
         
         "name":"Total cost",
-        "alt_type":"Total Cost of Episilia(Monthly) for AWS",
         "type":"Episilia cost",
         "display":true,
         "display_value_type":"cost",
         "fixed":false,
         "formula":"${i10}+${i11}+${i12}",
         "inputs":["i10","i11","i12"],
+        "value":0
+    },
+    "i7":{
+        
+        "name":"Cost Per GB",
+        "type":"Episilia cost",
+        "display":true,
+        "display_value_type":"cost",
+        "fixed":false,
+        "formula":"${i6}/${c4}",
+        "inputs":["i6","c4"],
         "value":0
     }
 

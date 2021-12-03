@@ -211,7 +211,7 @@ select::-ms-expand {
     margin-bottom: 50px;
   }
   .content .two {
-    width: 370px;
+    width: 350px;
   }
   .content .card .info {
     font-size: 16px;
@@ -231,7 +231,7 @@ select::-ms-expand {
     font-size: 13px;
   }
   .content .card .details .one {
-    margin-top: 7px;
+    margin-top: 15px;
     font-size: 13px;
     display: flex;
     justify-content: space-between;
@@ -254,12 +254,6 @@ select::-ms-expand {
     margin-top: 20px;
     font-size: 16px;
     width: 100%;
-  }
-
-  .col-3 {
-    float: left;
-    width: 27.33%;
-    position: relative;
   }
 
   input[type="number"] {
