@@ -22,7 +22,7 @@
         
         "name":"fixed_search_nodes",
         "type":"user_inputs",
-        "value":6
+        "value":1
     },
 
     "c28":{
@@ -225,10 +225,7 @@
         "fixed":true,
         "value":1
     },
-
-
-   
-    
+ 
     "i17":{
         
         "name":"Indexer",
@@ -337,12 +334,12 @@
  
     "i5":{
         
-        "name":"Input Data(TB)- Monthly",
+        "name":"Monthly Log Volume",
          "type":"Episilia cost",
          "display":true,
-         "display_value_type":"number",
+         "display_value_type":"data",
          "fixed":false,
-         "formula":"${c5}/1024",
+         "formula":"${c5}/1000",
          "inputs":["c5"],
          "value":0
      },
