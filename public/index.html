@@ -44,7 +44,7 @@ for(i in data){
             data[i]["value"] = c4;
         }
         if (i=="c5"){
-          data[i]["value"] = c5;
+            data[i]["value"] = c5;
       }
         if (i=="c7"){
             data[i]["value"] = c7;
@@ -190,17 +190,20 @@ price_cal()
       <div class="card one">
         <div class="info">Cost calculator</div>
         <div class="details" >
-          <form onsubmit="price_cal();return false" >
-          <div class="one">
-            <span>Daily Logs Volume(GB):</span>
-            <div class="col-3">
-            <input type="number" id="c4" value=1000 name="c4" required> 
-            <span class="focus-border"></span>
+          <form onsubmit="price_cal();return false">
+
+            <div class="one">
+              <span>Daily Logs Volume:</span>
+              <div class="col-3 inDisplay">
+                <span class="insideInput">GB</span>
+                <input type="number" id="c4" value=1000 name="c4" required/>
+                <span class="focus-border"></span>
             </div>
-            
           </div>
+
+         
           <div class="one">
-            <span>Parallel Search:</span>
+            <span>Concurrent Searches:</span>
             <div class="col-3">
             <select type="number" id="c7" name="c7" >
               <option value=10 selected="selected">1-10</option>
@@ -215,7 +218,7 @@ price_cal()
               <option value=100>90-100</option>
             </select>
             <span class="focus-border"></span>
-          </div>
+            </div>
           </div>
 
           <button type="submit" class="submit" >Calculate</button>
