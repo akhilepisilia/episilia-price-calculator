@@ -300,7 +300,7 @@
 
     "i11":{
         
-        "name":"Block Storage (S3)",
+        "name":"Object Storage(S3)",
         "type":"Infra Cost (High Level)",
         "display":true,
         "display_value_type":"cost",
