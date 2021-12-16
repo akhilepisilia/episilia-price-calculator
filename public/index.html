@@ -91,20 +91,22 @@ if(warn_msg_count == 0){
 console.warn("Warning :: Dont modify any of thies varibles values --",avb_list);
 warn_msg_count=warn_msg_count+1;
 }
+
 show_order_list=["Episilia cost","Infra Cost (High Level)","Compute Cost (Break Up)"];
+ignore_list=["Compute Cost (Break Up)"];
 
 //console.log("Creating div cards");
 var priceview = document.getElementById("priceview");
 priceview.innerHTML="";
-var card1 = document.createElement("div");
-card1.className ="card one two"
+var card = document.createElement("div");
+card.className ="card one two"
 
 
 var divdetails = document.createElement("div");
 divdetails.className ="details";
 for (order in show_order_list)
 {
-  if(show_order_list[order]=="Total Cost" )
+  if(ignore_list.includes(show_order_list[order]))
   {
     continue
   }
@@ -167,10 +169,10 @@ else{
     
   }
   
-card1.appendChild(divdetails);
+card.appendChild(divdetails);
 
 
-priceview.appendChild(card1);
+priceview.appendChild(card);
 
 //document.write(JSON.stringify(data))
 // this will show the info it in firebug console
